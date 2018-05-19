@@ -5,40 +5,48 @@
       <router-link to="createPost">Create Post</router-link>
     </header>
     <main>
-      <router-view :posts="posts" v-on:createPost="createPost"></router-view>
+      <router-view :posts="posts"></router-view>
     </main>
   </div>
 </template>
 
 <script>
-import firebase from './firebase'
-let db = firebase.firestore()
-db.settings({timestampsInSnapshots: true})
+// import { mapGetters, mapActions } from 'vuex'
+// import firebase from './firebase'
+// let db = firebase.firestore()
+// db.settings({timestampsInSnapshots: true})
 
-let postsCollection = db.collection('posts')
+// let postsCollection = db.collection('posts')
 
 export default {
   name: 'app',
-  created () {
-    this.fetchPosts()
-  },
+  // created () {
+  //   this.fetchPosts()
+  // },
   components: {
   },
-  data () {
-    return {
-      posts: []
-    }
-  },
-  methods: {
-    createPost (post) {
-      postsCollection.add({ title: post.title, isLiked: false })
-    },
-    fetchPosts () {
-      postsCollection.onSnapshot(posts => {
-        this.posts = posts.docs.map(p => p.data())
-      })
+  computed: {
+    posts () {
+      return this.$store.state.posts
     }
   }
+
+  // data () {
+  //   return {
+  //     posts: []
+  //   }
+  // }
+  // methods: {
+  //   createPost (post) {
+  //     postsCollection.add({ title: post.title, isLiked: false })
+  //   },
+  //   fetchPosts () {
+  //     postsCollection.onSnapshot(posts => {
+  //       // this.posts = posts.docs.map(p => p.data())
+
+  //     })
+  //   }
+  // }
 }
 </script>
 

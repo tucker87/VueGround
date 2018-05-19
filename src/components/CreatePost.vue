@@ -2,12 +2,14 @@
   <div>
     <h1>{{ msg }}</h1>
     <label>Title:</label>
-    <input type="text" v-model="title" @keyup.enter="submit"/>
-    <input type="button" @click="submit" value="Submit"/>
+    <input type="text" v-model="title" @keyup.enter="createPost"/>
+    <input type="button" @click="createPost" value="Submit"/>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   data () {
     return {
@@ -16,8 +18,12 @@ export default {
     }
   },
   methods: {
-    submit (e) {
-      this.$emit('createPost', this)
+    ...mapMutations([
+      'addPost'
+    ]),
+    createPost () {
+      const { title } = this
+      this.addPost({ title })
     }
   }
 }
