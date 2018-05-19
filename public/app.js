@@ -1,7 +1,11 @@
+import routes from './routes.js'
+import post from './post.js'
+
 var app = new Vue({
     el: "#Main",
     data: {
         appName: "Vue Ground",
+        currentRoute: window.location.pathname,
         posts: [
             { id: 0, title: "Cat Tax", isLiked: true }, 
             { id: 1, title: "Not a repost", isLiked: false },
@@ -11,6 +15,9 @@ var app = new Vue({
         ]
     },
     computed:{
+        ViewComponent () {
+            return routes[this.currentRoute] || NotFound
+          },      
         likedPosts() {
             return this.posts.filter(p => p.isLiked).length;
         }

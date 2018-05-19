@@ -1,3 +1,4 @@
+const _ = require('lodash')
 const http = require('http');
 const fs = require('fs');
 var url = require('url');
@@ -5,6 +6,17 @@ var url = require('url');
 const hostname = '127.0.0.1';
 const port = 3000;
 const dirName = './public'
+
+const mimes = {
+  js: 'text/javascript',
+  css: 'text/css',
+  html: 'text/html'
+}
+
+function getContentType(path){
+  type = _.last(path.split('.'))
+  return mimes[type];
+}
 
 const server = http.createServer((request, response) => {
   pathName = url.parse(request.url).pathname;
@@ -16,7 +28,7 @@ const server = http.createServer((request, response) => {
 
   fs.readFile(fullPath, function (err, data) {
     if (!err) {
-      response.writeHead(200, { 'Content-Type': 'text/html' });
+      response.writeHead(200, { 'Content-Type': getContentType(fullPath) });
       response.write(data);
       response.end();
     } else {

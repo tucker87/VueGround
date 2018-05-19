@@ -1,4 +1,4 @@
-Vue.component('post', {
+var postComponent = Vue.component('post', {
     props: ['post'],
     template: `<div class="post" @click="setLike">
                         <span class="title">{{ post.title }}</span>
@@ -10,3 +10,5 @@ Vue.component('post', {
         }
     }
 })
+
+export default postComponent

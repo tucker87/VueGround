@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "gulp": "^3.9.1",
-    "vue": "^2.5.16"
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {}
 }
