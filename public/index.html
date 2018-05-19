@@ -1,0 +1,15 @@
+<div id="Main">
+    <h3>{{appName}}</h3>
+    <h4>Liked Posts: {{likedPosts}}</h4>
+
+    <div class="wrapper">
+        <post v-for="post in posts" v-bind:post="post" v-bind:key="post.id">
+        </post>
+    </div>
+</div>
+
+
+<script src="lib/vue.js"></script>
+<script src="post.js"></script>
+<script src="app.js"></script>
+<link rel="stylesheet" href="index.css"/>
