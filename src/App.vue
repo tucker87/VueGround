@@ -2,23 +2,42 @@
   <div id="app">
     <header>
       <span>VueGround</span>
+      <router-link to="createPost">Create Post</router-link>
     </header>
     <main>
-      <router-view></router-view>
-      <div>
-        <post v-for="post in posts" v-bind:model="post" v-bind:key="post.id"></post>
-      </div>
+      <router-view :posts="posts" v-on:createPost="createPost"></router-view>
     </main>
   </div>
 </template>
 
 <script>
-import Post from '@/components/Post'
+import firebase from './firebase'
+let db = firebase.firestore()
+db.settings({timestampsInSnapshots: true})
+
+let postsCollection = db.collection('posts')
+
 export default {
   name: 'app',
-  props: ['posts'],
+  created () {
+    this.fetchPosts()
+  },
   components: {
-    Post
+  },
+  data () {
+    return {
+      posts: []
+    }
+  },
+  methods: {
+    createPost (post) {
+      postsCollection.add({ title: post.title, isLiked: false })
+    },
+    fetchPosts () {
+      postsCollection.onSnapshot(posts => {
+        this.posts = posts.docs.map(p => p.data())
+      })
+    }
   }
 }
 </script>
@@ -57,5 +76,12 @@ header span {
   font-weight: 400;
   box-sizing: border-box;
   padding-top: 16px;
+}
+
+header a {
+  display: inline;
+  color: white;
+  position: absolute;
+  right: 15px;
 }
 </style>
