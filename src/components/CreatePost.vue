@@ -8,8 +8,6 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-
 export default {
   data () {
     return {
@@ -18,12 +16,10 @@ export default {
     }
   },
   methods: {
-    ...mapMutations([
-      'addPost'
-    ]),
     createPost () {
       const { title } = this
-      this.addPost({ title })
+      this.$store.dispatch('addPost', { title })
+      this.title = ''
     }
   }
 }

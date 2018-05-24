@@ -11,42 +11,25 @@
 </template>
 
 <script>
-// import { mapGetters, mapActions } from 'vuex'
-// import firebase from './firebase'
-// let db = firebase.firestore()
-// db.settings({timestampsInSnapshots: true})
-
-// let postsCollection = db.collection('posts')
-
+// import { mapMutations } from 'vuex'
 export default {
   name: 'app',
-  // created () {
-  //   this.fetchPosts()
-  // },
-  components: {
+  created () {
+    this.setupSnapShot()
   },
   computed: {
     posts () {
       return this.$store.state.posts
     }
+  },
+  methods: {
+    setupSnapShot () {
+      let postsRef = this.$store.state.db.collection('posts')
+      postsRef.onSnapshot(posts => {
+        this.$store.dispatch('setPosts', posts.docs.map(p => p.data()))
+      })
+    }
   }
-
-  // data () {
-  //   return {
-  //     posts: []
-  //   }
-  // }
-  // methods: {
-  //   createPost (post) {
-  //     postsCollection.add({ title: post.title, isLiked: false })
-  //   },
-  //   fetchPosts () {
-  //     postsCollection.onSnapshot(posts => {
-  //       // this.posts = posts.docs.map(p => p.data())
-
-  //     })
-  //   }
-  // }
 }
 </script>
 
