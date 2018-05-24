@@ -24,6 +24,7 @@ div {
     padding: 5px;
     margin: 5px;
     font-size: large;
+    cursor: pointer;
 }
 
 .like:before {
@@ -32,7 +33,6 @@ div {
 }
 
 .liked:before {
-
     color: red;
 }
 </style>
