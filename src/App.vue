@@ -5,37 +5,28 @@
       <router-link to="createPost">Create Post</router-link>
     </header>
     <main>
-      <router-view :posts="posts" v-on:createPost="createPost"></router-view>
+      <router-view :posts="posts"></router-view>
     </main>
   </div>
 </template>
 
 <script>
-import firebase from './firebase'
-let db = firebase.firestore()
-db.settings({timestampsInSnapshots: true})
-
-let postsCollection = db.collection('posts')
-
+// import { mapMutations } from 'vuex'
 export default {
   name: 'app',
   created () {
-    this.fetchPosts()
+    this.setupSnapShot()
   },
-  components: {
-  },
-  data () {
-    return {
-      posts: []
+  computed: {
+    posts () {
+      return this.$store.state.posts
     }
   },
   methods: {
-    createPost (post) {
-      postsCollection.add({ title: post.title, isLiked: false })
-    },
-    fetchPosts () {
-      postsCollection.onSnapshot(posts => {
-        this.posts = posts.docs.map(p => p.data())
+    setupSnapShot () {
+      let postsRef = this.$store.state.db.collection('posts')
+      postsRef.onSnapshot(posts => {
+        this.$store.dispatch('setPosts', posts.docs.map(p => p.data()))
       })
     }
   }

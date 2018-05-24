@@ -2,8 +2,8 @@
   <div>
     <h1>{{ msg }}</h1>
     <label>Title:</label>
-    <input type="text" v-model="title" @keyup.enter="submit"/>
-    <input type="button" @click="submit" value="Submit"/>
+    <input type="text" v-model="title" @keyup.enter="createPost"/>
+    <input type="button" @click="createPost" value="Submit"/>
   </div>
 </template>
 
@@ -16,8 +16,10 @@ export default {
     }
   },
   methods: {
-    submit (e) {
-      this.$emit('createPost', this)
+    createPost () {
+      const { title } = this
+      this.$store.dispatch('addPost', { title })
+      this.title = ''
     }
   }
 }
