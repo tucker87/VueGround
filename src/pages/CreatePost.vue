@@ -1,8 +1,14 @@
 <template>
   <div>
     <h1>{{ msg }}</h1>
-    <label>Title:</label>
-    <input type="text" v-model="title" @keyup.enter="createPost"/>
+    <div class="field-wrap">
+      <label>Title:</label>
+      <input type="text" v-model="title"/>
+    </div>
+    <div class="field-wrap">
+      <label>Content:</label>
+      <textarea v-model="content"/>
+    </div>
     <input type="button" @click="createPost" value="Submit"/>
   </div>
 </template>
@@ -12,13 +18,13 @@ export default {
   data () {
     return {
       msg: 'Let\'s make a new post',
-      title: ''
+      title: '',
+      content: ''
     }
   },
   methods: {
     createPost () {
-      const { title } = this
-      this.$store.dispatch('addPost', { title })
+      this.$store.dispatch('addPost', this)
       this.title = ''
     }
   }
@@ -26,21 +32,18 @@ export default {
 </script>
 
 <style>
-h1, h2 {
-  font-weight: normal;
+.field-wrap {
+  margin: 10px;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+textarea {
+  width: 170px;
+  height: 100px;
 }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #35495E;
+label {
+    display: inline-block;
+    width:100px;
+    text-align: right;
 }
 </style>

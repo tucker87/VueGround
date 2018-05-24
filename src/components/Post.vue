@@ -1,8 +1,10 @@
 <template>
-  <div @click="setLiked">
-      <span class="title">{{ model.title }}</span>
-      <span class="like" :class="{ liked: model.isLiked }"></span>
-  </div>
+  <router-link :to="{ name: 'postDetails', params: {id: model.id}}">
+    <div>
+        <span class="title">{{ model.title }}</span>
+        <span class="like" :class="{ liked: model.isLiked }"></span>
+    </div>
+  </router-link>
 </template>
 
 <script>

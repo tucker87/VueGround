@@ -18,8 +18,8 @@ const mutations = {
   setPosts (state, posts) {
     state.posts = posts
   },
-  addPost (state, { title }) {
-    postsRef.add({ title, isLiked: false })
+  addPost (state, post) {
+    postsRef.add({ title: post.title, content: post.content, isLiked: false })
   },
   setLiked (state, post) {
     var postDoc = postsRef.doc(post.id)
@@ -34,6 +34,9 @@ const actions = {
 }
 
 const getters = {
+  getPostById: state => id => {
+    return postsRef.doc(id).get().then(p => p.data())
+  }
 }
 
 export default new Vuex.Store({

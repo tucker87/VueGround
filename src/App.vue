@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <header>
-      <router-link to="/">VueGround</router-link>
-      <router-link class="right" to="createPost">Create Post</router-link>
+      <router-link :to="{ name: 'posts' }">VueGround</router-link>
+      <router-link class="right" :to="{ name: 'createPost' }">Create Post</router-link>
     </header>
     <main>
       <router-view :posts="posts"></router-view>
@@ -11,7 +11,6 @@
 </template>
 
 <script>
-// import { mapMutations } from 'vuex'
 export default {
   name: 'app',
   created () {
