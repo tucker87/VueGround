@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Post from './Post'
+import Post from '../components/Post'
 export default {
   name: 'hello',
   props: ['posts'],

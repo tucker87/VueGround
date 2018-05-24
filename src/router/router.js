@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Posts from '@/components/Posts'
-import CreatePost from '@/components/CreatePost'
+import Posts from '@/pages/Posts'
+import CreatePost from '@/pages/CreatePost'
 
 Vue.use(Router)
 
