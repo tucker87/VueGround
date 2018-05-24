@@ -26,7 +26,7 @@ export default {
     setupSnapShot () {
       let postsRef = this.$store.state.db.collection('posts')
       postsRef.onSnapshot(posts => {
-        this.$store.dispatch('setPosts', posts.docs.map(p => p.data()))
+        this.$store.dispatch('setPosts', posts.docs.map(p => ({...p.data(), id: p.id})))
       })
     }
   }

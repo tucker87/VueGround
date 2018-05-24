@@ -1,5 +1,5 @@
 <template>
-  <div @click="setLike">
+  <div @click="setLiked">
       <span class="title">{{ model.title }}</span>
       <span class="like" :class="{ liked: model.isLiked }"></span>
   </div>
@@ -10,7 +10,9 @@ export default {
   name: 'post',
   props: ['model'],
   methods: {
-    setLike () { this.model.isLiked = !this.model.isLiked }
+    setLiked () {
+      this.$store.dispatch('setLiked', this.model)
+    }
   }
 }
 </script>

@@ -21,15 +21,16 @@ const mutations = {
   addPost (state, { title }) {
     postsRef.add({ title, isLiked: false })
   },
-  setLiked (state, { post, isLiked }) {
-    post.isLiked = isLiked
+  setLiked (state, post) {
+    var postDoc = postsRef.doc(post.id)
+    postDoc.update({isLiked: !post.isLiked})
   }
 }
 
 const actions = {
   setPosts: ({ commit }, posts) => commit('setPosts', posts),
   addPost: ({ commit }, post) => commit('addPost', post),
-  setLiked: ({ commit }) => commit('setLiked')
+  setLiked: ({ commit }, post) => commit('setLiked', post)
 }
 
 const getters = {
