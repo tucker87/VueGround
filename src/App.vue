@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <header>
-      <span>VueGround</span>
-      <router-link to="createPost">Create Post</router-link>
+      <router-link to="/">VueGround</router-link>
+      <router-link class="right" to="createPost">Create Post</router-link>
     </header>
     <main>
       <router-view :posts="posts"></router-view>
@@ -58,20 +58,16 @@ header {
   color: #ffffff;
 }
 
-header span {
-  display: block;
-  position: relative;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: .02em;
-  font-weight: 400;
-  box-sizing: border-box;
+header a {
+  display: inline-block;
+  color: white;
   padding-top: 16px;
+  font-size: 20px;
+  padding-top: 16px;
+  letter-spacing: .02em;
 }
 
-header a {
-  display: inline;
-  color: white;
+.right {
   position: absolute;
   right: 15px;
 }
